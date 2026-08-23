@@ -5,115 +5,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Meal Finder</title>
+    <title>World Explorer | Country & Weather</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+    <!-- NAVBAR -->
+    <nav class="navbar">
 
-    <header>
+        <div class="logo">
+            🌍 World Explorer
+        </div>
 
-        <a href="#home" class="logo">
-            🍴 Meal Finder
-        </a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#countries">Countries</a>
+            <a href="#about">About</a>
+        </div>
 
-        <nav>
-            <a href="#home" id="homeLink">Home</a>
-            <a href="#meals" id="mealsLink">Meals</a>
-        </nav>
-
-    </header>
-
-
-    <!-- ================= MAIN ================= -->
-
-    <main>
-
-        <!-- ================= HOME / SEARCH ================= -->
-
-        <section id="home" class="hero">
-
-            <div class="hero-content">
-
-                <h1>Find Your Perfect Meal 🍴</h1>
-
-                <p>
-                    Search for delicious meals and discover
-                    your next favorite recipe.
-                </p>
-
-                <div class="search-box">
-
-                    <input
-                        type="text"
-                        id="searchInput"
-                        placeholder="Search for a meal..."
-                    >
-
-                    <button id="searchButton">
-                        Search
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
+    </nav>
 
 
-        <!-- ================= RESULTS ================= -->
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
 
-        <section id="meals" class="results-section">
+        <div class="hero-content">
 
-            <h2>Search Results 🍽️</h2>
+            <p class="small-title">DISCOVER THE WORLD</p>
 
-            <p id="resultMessage">
-                Search for a meal to see the results.
+            <h1>
+                Explore Countries
+                <span>& Weather</span>
+            </h1>
+
+            <p class="hero-text">
+                Search for any country and discover its flag, population,
+                capital, currency, language and current weather.
             </p>
 
-            <div
-                id="mealResults"
-                class="meal-container">
+            <!-- SEARCH -->
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="countryInput"
+                    placeholder="Enter country name...">
+
+                <button onclick="searchCountry()">
+                    🔍 Search
+                </button>
+
             </div>
 
-            <button
-                id="showAllButton"
-                class="show-all-button">
+        </div>
 
-                SHOW ALL
+    </section>
 
-            </button>
 
-        </section>
+    <!-- RESULTS -->
+    <main id="countries">
+
+        <div id="loading" class="loading">
+            Search for a country to explore 🌎
+        </div>
+
+        <div id="countryContainer" class="country-grid"></div>
 
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- WEATHER MODAL -->
+    <div id="weatherModal" class="modal">
 
-    <footer>
+        <div class="modal-content">
 
-        <div class="footer-content">
+            <button class="close-button" onclick="closeWeather()">
+                ×
+            </button>
 
-            <h3>🍴 Meal Finder</h3>
-
-            <p>
-                Discover delicious meals with TheMealDB API.
-            </p>
-
-            <p>
-                © 2026 Meal Finder. All Rights Reserved.
-            </p>
+            <div id="weatherContent">
+                Loading weather...
+            </div>
 
         </div>
 
+    </div>
+
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+
+        <h2>About World Explorer</h2>
+
+        <p>
+            World Explorer is a simple web application that uses APIs
+            to provide country and weather information.
+        </p>
+
+        <p>
+            Country information is provided by REST Countries and
+            weather information is provided by Open-Meteo.
+        </p>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © 2026 World Explorer
+        </p>
+
+        <p>
+            Built using HTML, CSS, JavaScript & APIs
+        </p>
+
     </footer>
 
-
-    <!-- JavaScript -->
 
     <script src="script.js"></script>
 
