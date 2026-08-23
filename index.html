@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Meal Finder</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<a href="#home" class="logo">
+🍴 Meal Finder
+</a>
+
+<nav>
+<a href="#home" id="homeLink">Home</a>
+<a href="#meals" id="mealsLink">Meals</a>
+</nav>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main>
+
+<!-- ================= HOME / SEARCH ================= -->
+
+<section id="home" class="hero">
+
+<div class="hero-content">
+
+<h1>Find Your Perfect Meal 🍴</h1>
+
+<p>
+Search for delicious meals and discover
+your next favorite recipe.
+</p>
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search for a meal..."
+>
+
+<button id="searchButton">
+Search
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= RESULTS ================= -->
+
+<section id="meals" class="results-section">
+
+<h2>Search Results 🍽️</h2>
+
+<p id="resultMessage">
+Search for a meal to see the results.
+</p>
+
+<div
+id="mealResults"
+class="meal-container">
+</div>
+
+<button
+id="showAllButton"
+class="show-all-button">
+
+SHOW ALL
+
+</button>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="footer-content">
+
+<h3>🍴 Meal Finder</h3>
+
+<p>
+Discover delicious meals with TheMealDB API.
+</p>
+
+<p>
+© 2026 Meal Finder. All Rights Reserved.
+</p>
+
+</div>
+
+</footer>
+
+
+<!-- JavaScript -->
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
