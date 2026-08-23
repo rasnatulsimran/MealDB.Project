@@ -1,176 +1,435 @@
-const searchInput = document.getElementById("searchInput");
-const searchButton = document.getElementById("searchButton");
-const mealResults = document.getElementById("mealResults");
-const resultMessage = document.getElementById("resultMessage");
-const showAllButton = document.getElementById("showAllButton");
+/* ================= GENERAL ================= */
 
-let allMeals = [];
-
-
-// SEARCH MEALS
-async function searchMeals() {
-
-const searchText = searchInput.value.trim();
-
-// Check if search box is empty
-if (searchText === "") {
-resultMessage.textContent = "Please enter a meal name.";
-mealResults.innerHTML = "";
-showAllButton.style.display = "none";
-return;
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 
-// Remove previous results
-mealResults.innerHTML = "";
-showAllButton.style.display = "none";
-
-resultMessage.textContent = "Searching...";
-
-try {
-
-// Create API URL
-const apiURL =
-"https://www.themealdb.com/api/json/v1/1/search.php?s="
-+ encodeURIComponent(searchText);
-
-console.log("API URL:", apiURL);
-
-// Get API data
-const response = await fetch(apiURL);
-
-console.log("Response:", response);
-
-// Convert to JSON
-const data = await response.json();
-
-console.log("Data:", data);
-
-// Store meals
-allMeals = data.meals || [];
-
-// No meals found
-if (allMeals.length === 0) {
-
-resultMessage.textContent =
-`No meals found for "${searchText}".`;
-
-return;
+html {
+scroll-behavior: smooth;
 }
 
-// Show result count
-resultMessage.textContent =
-`${allMeals.length} meal(s) found.`;
-
-// Show first 5 meals
-displayMeals(allMeals.slice(0, 5));
-
-// Show SHOW ALL if there are more than 5
-if (allMeals.length > 5) {
-showAllButton.style.display = "block";
-}
-
-} catch (error) {
-
-console.error("ERROR:", error);
-
-resultMessage.textContent =
-"Unable to load meals. Please try again.";
-
-}
+body {
+font-family: "Poppins", sans-serif;
+background-color: #fff8ed;
+color: #2b1710;
 }
 
 
-// DISPLAY MEALS
-function displayMeals(meals) {
+/* ================= HEADER ================= */
 
-mealResults.innerHTML = "";
+header {
+background-color: #ff3b30;
+color: white;
 
-meals.forEach(function(meal) {
+padding: 18px 7%;
 
-const mealCard = document.createElement("div");
+display: flex;
+justify-content: space-between;
+align-items: center;
 
-mealCard.className = "meal-card";
+border-bottom: 5px solid #2b1710;
+}
 
-mealCard.innerHTML = `
+.logo {
+font-size: 27px;
+font-weight: 700;
+letter-spacing: -1px;
+}
 
-<img
-src="${meal.strMealThumb}"
-alt="${meal.strMeal}"
->
+nav {
+display: flex;
+gap: 28px;
+}
 
-<div class="meal-info">
+nav a {
+color: white;
+text-decoration: none;
 
-<span class="meal-id">
-Meal ID: ${meal.idMeal}
-</span>
+font-weight: 600;
 
-<h3>
-${meal.strMeal}
-</h3>
+transition: 0.2s;
+}
 
-<p class="meal-title">
-Meal Title: ${meal.strMeal}
-</p>
-
-<p class="instructions">
-<strong>Cooking Instructions:</strong>
-<br>
-${meal.strInstructions}
-</p>
-
-</div>
-`;
-
-mealResults.appendChild(mealCard);
-});
+nav a:hover {
+color: #ffd23f;
+transform: translateY(-2px);
 }
 
 
-// SHOW ALL BUTTON
-showAllButton.addEventListener("click", function() {
+/* ================= HERO ================= */
 
-displayMeals(allMeals);
+.hero {
+min-height: 480px;
 
-showAllButton.style.display = "none";
+display: flex;
+justify-content: center;
+align-items: center;
 
-resultMessage.textContent =
-`Showing all ${allMeals.length} meals.`;
-});
+text-align: center;
 
+padding: 60px 20px;
 
-// SEARCH BUTTON
-searchButton.addEventListener("click", searchMeals);
+background:
+linear-gradient(
+rgba(255, 59, 48, 0.86),
+rgba(255, 59, 48, 0.86)
+),
+url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80");
 
+background-size: cover;
+background-position: center;
 
-// PRESS ENTER TO SEARCH
-searchInput.addEventListener("keypress", function(event) {
-
-if (event.key === "Enter") {
-searchMeals();
+border-bottom: 5px solid #2b1710;
 }
 
-});
+.hero-content {
+max-width: 850px;
+color: white;
+}
+
+.hero h1 {
+font-size: 55px;
+font-weight: 700;
+
+line-height: 1.1;
+
+margin-bottom: 20px;
+
+letter-spacing: -2px;
+}
+
+.hero p {
+font-size: 18px;
+
+max-width: 650px;
+
+margin: 0 auto 35px;
+
+line-height: 1.7;
+}
 
 
-// ================= NAVIGATION =================
+/* ================= SEARCH ================= */
 
-document.getElementById("homeLink").addEventListener("click", function(event) {
+.search-box {
+display: flex;
 
-event.preventDefault();
+max-width: 650px;
 
-document.getElementById("home").scrollIntoView({
-behavior: "smooth"
-});
+margin: auto;
 
-});
+background-color: white;
+
+padding: 8px;
+
+border-radius: 15px;
+
+border: 4px solid #2b1710;
+
+box-shadow: 8px 8px 0 #2b1710;
+}
+
+.search-box input {
+flex: 1;
+
+padding: 16px;
+
+border: none;
+
+outline: none;
+
+font-family: "Poppins", sans-serif;
+
+font-size: 16px;
+
+color: #2b1710;
+
+border-radius: 10px;
+}
+
+.search-box input::placeholder {
+color: #999;
+}
+
+.search-box button {
+padding: 15px 28px;
+
+border: none;
+
+background-color: #ffd23f;
+
+color: #2b1710;
+
+font-family: "Poppins", sans-serif;
+
+font-size: 16px;
+
+font-weight: 700;
+
+cursor: pointer;
+
+border-radius: 10px;
+
+transition: 0.2s;
+}
+
+.search-box button:hover {
+background-color: #ffb703;
+
+transform: translateY(-2px);
+}
 
 
-document.getElementById("mealsLink").addEventListener("click", function(event) {
+/* ================= RESULTS ================= */
 
-event.preventDefault();
+.results-section {
+padding: 70px 7%;
 
-document.getElementById("meals").scrollIntoView({
-behavior: "smooth"
-});
+text-align: center;
+}
 
-});
+.results-section h2 {
+font-size: 38px;
+
+font-weight: 700;
+
+margin-bottom: 8px;
+
+letter-spacing: -1px;
+}
+
+#resultMessage {
+color: #795548;
+
+margin-bottom: 40px;
+
+font-size: 15px;
+}
+
+
+/* ================= MEAL GRID ================= */
+
+.meal-container {
+display: grid;
+
+grid-template-columns: repeat(
+auto-fit,
+minmax(280px, 1fr)
+);
+
+gap: 35px;
+
+text-align: left;
+}
+
+
+/* ================= MEAL CARD ================= */
+
+.meal-card {
+background-color: white;
+
+border-radius: 18px;
+
+overflow: hidden;
+
+border: 3px solid #2b1710;
+
+box-shadow: 7px 7px 0 #ff3b30;
+
+transition: 0.25s ease;
+}
+
+.meal-card:hover {
+transform: translateY(-8px) rotate(-1deg);
+
+box-shadow: 10px 10px 0 #ffd23f;
+}
+
+.meal-card img {
+width: 100%;
+
+height: 240px;
+
+object-fit: cover;
+
+display: block;
+}
+
+.meal-info {
+padding: 24px;
+}
+
+.meal-info h3 {
+font-size: 23px;
+
+margin-bottom: 10px;
+
+color: #ff3b30;
+}
+
+.meal-id {
+display: inline-block;
+
+background-color: #ffd23f;
+
+color: #2b1710;
+
+padding: 6px 11px;
+
+border-radius: 8px;
+
+font-size: 12px;
+
+font-weight: 700;
+
+margin-bottom: 15px;
+}
+
+.meal-title {
+font-weight: 600;
+
+margin-bottom: 10px;
+
+color: #2b1710;
+}
+
+.instructions {
+color: #795548;
+
+line-height: 1.7;
+
+font-size: 14px;
+
+display: -webkit-box;
+
+-webkit-line-clamp: 7;
+
+-webkit-box-orient: vertical;
+
+overflow: hidden;
+}
+
+
+/* ================= SHOW ALL ================= */
+
+.show-all-button {
+display: none;
+
+margin: 45px auto 0;
+
+padding: 15px 32px;
+
+border: 3px solid #2b1710;
+
+background-color: #ff3b30;
+
+color: white;
+
+border-radius: 12px;
+
+font-family: "Poppins", sans-serif;
+
+font-size: 16px;
+
+font-weight: 700;
+
+cursor: pointer;
+
+box-shadow: 5px 5px 0 #2b1710;
+
+transition: 0.2s;
+}
+
+.show-all-button:hover {
+background-color: #ffd23f;
+
+color: #2b1710;
+
+transform: translate(3px, 3px);
+
+box-shadow: 2px 2px 0 #2b1710;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+background-color: #2b1710;
+
+color: white;
+
+text-align: center;
+
+padding: 45px 20px;
+
+margin-top: 30px;
+}
+
+.footer-content h3 {
+font-size: 25px;
+
+margin-bottom: 10px;
+}
+
+.footer-content p {
+color: #ffd9c9;
+
+margin-bottom: 8px;
+
+font-size: 14px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 650px) {
+
+header {
+flex-direction: column;
+
+gap: 15px;
+
+text-align: center;
+}
+
+nav {
+gap: 20px;
+}
+
+.hero {
+min-height: 450px;
+}
+
+.hero h1 {
+font-size: 38px;
+}
+
+.hero p {
+font-size: 15px;
+}
+
+.search-box {
+flex-direction: column;
+
+box-shadow: 5px 5px 0 #2b1710;
+}
+
+.search-box input {
+width: 100%;
+}
+
+.search-box button {
+width: 100%;
+}
+
+.results-section {
+padding: 50px 5%;
+}
+
+.results-section h2 {
+font-size: 30px;
+}
+
+}
